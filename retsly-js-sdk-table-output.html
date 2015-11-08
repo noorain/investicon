@@ -1,0 +1,42 @@
+<head>
+  <!-- Include the SDK -->
+  <script src='https://rets.ly/js/sdk'></script>
+</head>
+
+<body>
+  <!-- Content -->
+</body>
+
+<!-- Get listing data from "test" vendor -->
+<script type="text/javascript">
+  var retsly = new Retsly('ZTjKUKq7oC8dTZfoqsTx', '2a002a31fd25a57ffbf2ca241d6eaec2');
+  retsly.ready(function(){
+    // '/api/v1/<vendor>/<resource>.json'
+    retsly.get('/api/v1/armls/listings.json', {limit: 10}, function(res){
+      if (!res.success) throw new Error(res.bundle);
+
+      console.log(res.bundle[0]);
+
+      for ( var b of res.bundle) {
+       
+        document.write("<br/>\n");
+        document.write("<br/>\n");
+
+        // console.log(b);
+
+        document.write("<br/>\n");
+        document.write("address: " + b.address + "<br/>\n");
+        document.write("price: "   + b.price   + "<br/>\n"); 
+        document.write("\n");
+        document.write("<table><tr>\n");
+        for (var m of b.media) {
+          document.write("  <td>\n");
+          document.write("    <img src=\""+m.url+"\" style=\"width:40px;height:40px;\">\n");
+          document.write("  </td>\n");
+          }
+        document.write("</tr></table>");
+        }
+
+    });
+  });
+</script>
